@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/mainActivity">
+
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.stepup.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+    <activity
+        android:id="@+id/registerActivity"
+        android:name="com.example.stepup.RegisterActivity"
+        android:label="activity_register"
+        tools:layout="@layout/activity_register" />
+    <activity
+        android:id="@+id/accountActivity"
+        android:name="com.example.stepup.AccountActivity"
+        android:label="activity_account"
+        tools:layout="@layout/activity_account" />
+    <activity
+        android:id="@+id/compassActivity"
+        android:name="com.example.stepup.CompassActivity"
+        android:label="activity_compass"
+        tools:layout="@layout/activity_compass" />
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.example.stepup.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
+
+</navigation>
