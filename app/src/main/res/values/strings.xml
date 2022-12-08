@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">StepUP</string>
+
+    <!--    activity_register strings-->
+    <string name="register_text">Rejestracja</string>
+    <string name="register_email">e-mail</string>
+    <string name="register_password">hasło</string>
+    <string name="register_btn">zarejestruj się</string>
+    <string name="register_login_btn">Zaloguj się</string>
+
+    <!--    activity_login strings-->
+    <string name="login_text">Logowanie</string>
+    <string name="login_email">e-mail</string>
+    <string name="login_password">hasło</string>
+    <string name="login_btn">Zaloguj się</string>
+    <string name="login_new_user_btn">Załóż konto</string>
+
+
+
+
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
 </resources>
