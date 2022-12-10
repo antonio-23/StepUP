@@ -4,15 +4,15 @@
     tools:ignore="HardcodedText">
 
     <item
-        android:id="@+id/nav_home"
+        android:id="@+id/mainActivity"
         android:title="Strona Główna" />
 
     <item
-        android:id="@+id/nav_account"
+        android:id="@+id/accountActivity"
         android:title="Twoje Konto" />
 
     <item
-        android:id="@+id/nav_compass"
+        android:id="@+id/compassActivity"
         android:title="Kompas" />
 
     <item

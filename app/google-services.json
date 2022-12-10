@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "231231734762",
+    "firebase_url": "https://stepup-56ccc-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "stepup-56ccc",
+    "storage_bucket": "stepup-56ccc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231231734762:android:dc760302b606a0af242893",
+        "android_client_info": {
+          "package_name": "com.example.stepup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "231231734762-m5pe2jgljl6imld6htfv2firghehi8cv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.stepup",
+            "certificate_hash": "dd815fba6f5561277805789be4b5e5bafb6e1282"
+          }
+        },
+        {
+          "client_id": "231231734762-c1n8eb0e6imc77malvbk71j2gdicjoqr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAesEFUoYwKiW5FRuJmwjTY6W31eQOoz8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "231231734762-c1n8eb0e6imc77malvbk71j2gdicjoqr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
