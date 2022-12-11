@@ -16,6 +16,6 @@
     <string name="login_new_user_btn">Załóż konto</string>
 
 
-    <string name="nav_open">Open</string>
-    <string name="nav_close">Close</string>
+    <string name="menu_drawer_open">Open</string>
+    <string name="menu_drawer_close">Close</string>
 </resources>

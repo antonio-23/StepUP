@@ -4,11 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class CompassActivity extends AppCompatActivity {
+import com.example.stepup.databinding.ActivityCompassBinding;
+
+public class CompassActivity extends DrawerBaseActivity {
+    ActivityCompassBinding activityCompassBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_compass);
+//        setContentView(R.layout.activity_compass);
+        activityCompassBinding = ActivityCompassBinding.inflate(getLayoutInflater());
+        setContentView(activityCompassBinding.getRoot());
+        allocateActivityTitle("Kompas");
     }
 }
