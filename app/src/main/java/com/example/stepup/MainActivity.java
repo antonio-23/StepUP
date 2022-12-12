@@ -22,9 +22,6 @@ public class MainActivity extends DrawerBaseActivity {
     ActivityMainBinding activityMainBinding;
 
     private FirebaseAuth mAuth;
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
