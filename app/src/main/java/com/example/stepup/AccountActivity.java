@@ -3,6 +3,7 @@ package com.example.stepup;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.hardware.SensorEvent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +31,11 @@ public class AccountActivity extends DrawerBaseActivity {
 
     public void logout(View view){
         FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(AccountActivity.this, LoginActivity.class));
+        startActivity(new Intent(this, LoginActivity.class));
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+
     }
 }

@@ -9,12 +9,20 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 
 import android.content.Intent;
+import android.hardware.SensorEvent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.stepup.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class MainActivity extends DrawerBaseActivity {
@@ -33,7 +41,6 @@ public class MainActivity extends DrawerBaseActivity {
         mAuth = FirebaseAuth.getInstance();
     }
 
-
     @Override
     public void onStart() {
         super.onStart();
@@ -43,4 +50,13 @@ public class MainActivity extends DrawerBaseActivity {
         }
     }
 
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+
+    }
+
+    public void logout(View view){
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(this, LoginActivity.class));
+    }
 }

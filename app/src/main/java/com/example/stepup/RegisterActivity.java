@@ -16,6 +16,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.net.URL;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -23,6 +27,8 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText email, password;
     private Button btnRegister;
     private TextView textLogin;
+    FirebaseDatabase database = FirebaseDatabase.getInstance("https://stepup-56ccc-default-rtdb.europe-west1.firebasedatabase.app/");
+    DatabaseReference myRef = database.getReference("Users");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +66,21 @@ public class RegisterActivity extends AppCompatActivity {
             password.setError("Hasło nie może być puste.");
         }
         else {
+//            myRef.push().setValue(user,pass).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                @Override
+//                public void onComplete(@NonNull Task<Void> task) {
+//
+//                    if(task.isSuccessful())
+//                    {
+//                        Toast.makeText(RegisterActivity.this, "Użytkownik zarejestrowany.", Toast.LENGTH_SHORT).show();
+//                        startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+//                    }
+//                    else
+//                    {
+//                        Toast.makeText(RegisterActivity.this, "Rejestracja błędna. Wprowadź poprawne dane.", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            });
             mAuth.createUserWithEmailAndPassword(user,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {

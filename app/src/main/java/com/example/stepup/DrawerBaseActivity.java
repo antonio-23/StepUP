@@ -1,6 +1,7 @@
 package com.example.stepup;
 
 import android.content.Intent;
+import android.hardware.SensorEvent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,7 +17,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 
 
-public class DrawerBaseActivity extends AppCompatActivity implements DrawerBaseActivity_m {
+public abstract class DrawerBaseActivity extends AppCompatActivity implements DrawerBaseActivity_m {
 
     DrawerLayout drawerLayout;
 
@@ -65,4 +66,6 @@ public class DrawerBaseActivity extends AppCompatActivity implements DrawerBaseA
             getSupportActionBar().setTitle(titleString);
         }
     }
+
+    public abstract void onSensorChanged(SensorEvent event);
 }
