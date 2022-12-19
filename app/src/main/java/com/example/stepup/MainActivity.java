@@ -13,6 +13,7 @@ import android.hardware.SensorEvent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.stepup.databinding.ActivityMainBinding;
@@ -30,6 +31,8 @@ public class MainActivity extends DrawerBaseActivity {
     ActivityMainBinding activityMainBinding;
 
     private FirebaseAuth mAuth;
+    private Button btnLogout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
@@ -39,6 +42,8 @@ public class MainActivity extends DrawerBaseActivity {
         setContentView(activityMainBinding.getRoot());
 
         mAuth = FirebaseAuth.getInstance();
+        btnLogout = findViewById(R.id.btnLogout);
+
     }
 
     @Override

@@ -12,8 +12,20 @@
         android:id="@+id/compass_view"
         android:layout_width="148dp"
         android:layout_height="113dp"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="52dp"
+        android:textAlignment="center"
+        android:textSize="36dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/compass_value"
+        android:layout_width="148dp"
+        android:layout_height="113dp"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="52dp"
         android:textAlignment="center"
         android:textSize="36dp"
         app:layout_constraintStart_toStartOf="parent"

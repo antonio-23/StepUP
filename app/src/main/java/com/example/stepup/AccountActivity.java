@@ -7,6 +7,7 @@ import android.hardware.SensorEvent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.stepup.databinding.ActivityAccountBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,6 +28,10 @@ public class AccountActivity extends DrawerBaseActivity {
 
         mAuth = FirebaseAuth.getInstance();
         btnLogout = findViewById(R.id.btnLogout);
+
+        final TextView userName = (TextView) findViewById(R.id.userEmail);
+        String email = mAuth.getCurrentUser().getEmail().toString();
+        userName.setText(email);
     }
 
     public void logout(View view){
