@@ -1,17 +1,16 @@
 package com.example.stepup;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.ui.AppBarConfiguration;
 
-
+import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
 import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,19 +18,18 @@ import android.widget.TextView;
 import com.example.stepup.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 
-public class MainActivity extends DrawerBaseActivity {
+public class MainActivity extends DrawerBaseActivity implements SensorEventListener {
 
     ActivityMainBinding activityMainBinding;
 
     private FirebaseAuth mAuth;
     private Button btnLogout;
+    //kroki
+    private SensorManager sensorManager;
+    private Sensor stepCounterSensor;
+    private int stepCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +42,9 @@ public class MainActivity extends DrawerBaseActivity {
         mAuth = FirebaseAuth.getInstance();
         btnLogout = findViewById(R.id.btnLogout);
 
+        //kroki
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        stepCounterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
     }
 
     @Override
@@ -55,9 +56,33 @@ public class MainActivity extends DrawerBaseActivity {
         }
     }
 
+    //kroki
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        stepCounterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        sensorManager.registerListener(this, stepCounterSensor, SensorManager.SENSOR_DELAY_NORMAL);
+
+        return Service.START_STICKY;
+    }
+
     @Override
     public void onSensorChanged(SensorEvent event) {
+        // Sprawdź, czy wartość akceleracji w osi z przekroczyła pewien próg
+        if (event.values[2] > 5.0) {
+            // Jeśli tak, zwiększ licznik kroków o jeden
+            stepCount++;
+        }
+        TextView stepCountTextView = findViewById(R.id.tv_stepsTaken); // Pobierz element TextView z interfejsu użytkownika
+        stepCountTextView.setText(String.valueOf(stepCount)); // Ustaw tekst elementu TextView na aktualną liczbę kroków
+    }
 
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        // Ta metoda jest wymagana przez interfejs SensorEventListener, ale nie jest nam potrzebna w tym przypadku
+    }
+
+    public int getStepCount() {
+        return stepCount;
     }
 
     public void logout(View view){

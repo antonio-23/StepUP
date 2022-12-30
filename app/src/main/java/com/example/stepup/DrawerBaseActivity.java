@@ -68,4 +68,5 @@ public abstract class DrawerBaseActivity extends AppCompatActivity implements Dr
     }
 
     public abstract void onSensorChanged(SensorEvent event);
+
 }
