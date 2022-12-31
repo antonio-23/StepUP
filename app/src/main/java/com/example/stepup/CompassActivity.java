@@ -33,12 +33,12 @@ public class CompassActivity extends DrawerBaseActivity implements SensorEventLi
     boolean flashOn = false;
 
     //Kompas1
-    private SensorManager sensorManager;
-    private Sensor compassSensor;
-    private TextView compassView;
-    private ImageView compassImage;
-    private float DegreeStart = 0f;
-    long lastUpdateTime = 0;
+//    private SensorManager sensorManager;
+//    private Sensor compassSensor;
+//    private TextView compassView;
+//    private ImageView compassImage;
+//    private float DegreeStart = 0f;
+//    long lastUpdateTime = 0;
 
     //Kompas2
 //    float[] temp = new float[9];
@@ -50,12 +50,20 @@ public class CompassActivity extends DrawerBaseActivity implements SensorEventLi
 //    private float[] mGravity = new float[3];
 //    private float[] mMagnetic = new float[3];
 
+    //Kompas3
+    private ImageView imageView;
+    private float[] mGravity = new float[3];
+    private float[] mGeomagnetic = new float[3];
+    private float azimuth = 0f;
+    private float currectAzimuth = 0f;
+    private SensorManager mSensorManager;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compass);
+
         activityCompassBinding = ActivityCompassBinding.inflate(getLayoutInflater());
         setContentView(activityCompassBinding.getRoot());
         allocateActivityTitle("Kompas");
@@ -88,13 +96,17 @@ public class CompassActivity extends DrawerBaseActivity implements SensorEventLi
         });
 
         //Kompas1
-        compassView = (TextView) findViewById(R.id.compass_view);
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        compassSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+//        compassView = (TextView) findViewById(R.id.compass_view);
+//        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+//        compassSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
 
         //kompas2
 //        valueView = (TextView) findViewById(R.id.compass_view);
 //        directionView = (TextView) findViewById(R.id.compass_value);
+
+        //kompas3
+        imageView = (ImageView) findViewById(R.id.image_compass);
+        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
     }
     //Latarka
@@ -119,19 +131,24 @@ public class CompassActivity extends DrawerBaseActivity implements SensorEventLi
     protected void onResume(){
         super.onResume();
         //kompas1
-        sensorManager.registerListener((SensorEventListener) this, compassSensor, SensorManager.SENSOR_DELAY_NORMAL);
+//        sensorManager.registerListener((SensorEventListener) this, compassSensor, SensorManager.SENSOR_DELAY_NORMAL);
         //kompas2
 //        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_UI);
 //        mSensorManager.registerListener(this, mField, SensorManager.SENSOR_DELAY_UI);
+        //kompas3
+        mSensorManager.registerListener(this,mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD),SensorManager.SENSOR_DELAY_GAME);
+        mSensorManager.registerListener(this,mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),SensorManager.SENSOR_DELAY_GAME);
     }
 
     @Override
     protected void onPause(){
         super.onPause();
         //kompas1
-        sensorManager.unregisterListener((SensorEventListener) this);
+//        sensorManager.unregisterListener((SensorEventListener) this);
         //kompas2
 //        mSensorManager.unregisterListener(this);
+        //kompas3
+        mSensorManager.unregisterListener(this);
     }
 
     //kompas2
@@ -176,13 +193,14 @@ public class CompassActivity extends DrawerBaseActivity implements SensorEventLi
 //    }
 
     @Override
-    public void onSensorChanged(SensorEvent event){
+    public void onSensorChanged(SensorEvent sensorEvent) {
         //kompas1
 //        float degree = (float) Math.toRadians(event.values[0]);
 //        Double degree = (event.values[0] * 180 / Math.PI);
 //        Double degrees = (values[i] * 180) / Math.PI
-        float degree = Math.round(event.values[0]);
-        compassView.setText(Double.toString(degree) + "°");
+
+//        float degree = Math.round(event.values[0]);
+//        compassView.setText(Double.toString(degree) + "°");
 
         //animacja kompasu
 //        RotateAnimation ra = new RotateAnimation(DegreeStart, -degree, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
@@ -208,9 +226,43 @@ public class CompassActivity extends DrawerBaseActivity implements SensorEventLi
 //        if (mGravity != null && mMagnetic != null){
 //            updateDirection();
 //        }
+//
+//    }
+        //kompas3
+        final float alpha = 0.97f;
+        synchronized (this) {
+            if(sensorEvent.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+                mGravity[0] = alpha*mGravity[0]+(1-alpha)*sensorEvent.values[0];
+                mGravity[1] = alpha*mGravity[1]+(1-alpha)*sensorEvent.values[1];
+                mGravity[2] = alpha*mGravity[2]+(1-alpha)*sensorEvent.values[2];
+            }
+
+            if(sensorEvent.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
+                mGeomagnetic[0] = alpha*mGeomagnetic[0]+(1-alpha)*sensorEvent.values[0];
+                mGeomagnetic[1] = alpha*mGeomagnetic[1]+(1-alpha)*sensorEvent.values[1];
+                mGeomagnetic[2] = alpha*mGeomagnetic[2]+(1-alpha)*sensorEvent.values[2];
+            }
+
+            float R[] = new float[9];
+            float I[] = new float[9];
+            boolean success = SensorManager.getRotationMatrix(R,I,mGravity,mGeomagnetic);
+            if (success) {
+                float orientation[] = new float[3];
+                SensorManager.getOrientation(R,orientation);
+                azimuth = (float)Math.toDegrees(orientation[0]);
+                azimuth = (azimuth+360)%360;
+
+                Animation anim = new RotateAnimation(-currectAzimuth,-azimuth,Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+                currectAzimuth = azimuth;
+
+                anim.setDuration(500);
+                anim.setRepeatCount(0);
+                anim.setFillAfter(true);
+
+                imageView.startAnimation(anim);
+            }
+        }
     }
-
-
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 

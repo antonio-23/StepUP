@@ -30,6 +30,12 @@ public class MainActivity extends DrawerBaseActivity implements SensorEventListe
     private SensorManager sensorManager;
     private Sensor stepCounterSensor;
     private int stepCount;
+    private void Dodaj() {
+        // Jeśli tak, zwiększ licznik kroków o jeden
+        stepCount += stepCount;
+        TextView stepCountTextView = findViewById(R.id.tv_stepsTaken); // Pobierz element TextView z interfejsu użytkownika
+        stepCountTextView.setText(String.valueOf(stepCount)); // Ustaw tekst elementu TextView na aktualną liczbę kroków
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +75,11 @@ public class MainActivity extends DrawerBaseActivity implements SensorEventListe
     public void onSensorChanged(SensorEvent event) {
         // Sprawdź, czy wartość akceleracji w osi z przekroczyła pewien próg
         if (event.values[2] > 5.0) {
-            // Jeśli tak, zwiększ licznik kroków o jeden
-            stepCount++;
+            Dodaj();
         }
-        TextView stepCountTextView = findViewById(R.id.tv_stepsTaken); // Pobierz element TextView z interfejsu użytkownika
-        stepCountTextView.setText(String.valueOf(stepCount)); // Ustaw tekst elementu TextView na aktualną liczbę kroków
     }
+
+
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
