@@ -6,21 +6,21 @@
     android:layout_height="180dp"
     android:background="@drawable/background"
     android:orientation="vertical"
-    android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
 
-    <TextView
-        android:id="@+id/userName"
-        android:layout_width="139dp"
-        android:layout_height="91dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
-        android:text="Witaj"
-        android:textColor="@color/white"
-        android:textSize="38dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/userName"-->
+<!--        android:layout_width="139dp"-->
+<!--        android:layout_height="91dp"-->
+<!--        android:layout_marginStart="10dp"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:text="Witaj"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="38dp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 <!--    <TextView-->
 <!--        android:id="@+id/textView8"-->
@@ -41,5 +41,26 @@
 <!--        android:onClick="logout"-->
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toBottomOf="@+id/textView8" />-->
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/hiking" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="85dp"
+        android:layout_marginEnd="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/stepup" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
