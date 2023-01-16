@@ -42,7 +42,7 @@ public class MainActivity extends DrawerBaseActivity implements SensorEventListe
         setContentView(activityMainBinding.getRoot());
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        //textViewStepCounter = findViewById(R.id.tv_stepsTaken);
+        textViewStepCounter = findViewById(R.id.tv_stepsTaken);
         textViewStepDetector = findViewById(R.id.tv_stepsTaken);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 

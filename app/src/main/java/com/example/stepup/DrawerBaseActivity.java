@@ -57,6 +57,10 @@ public abstract class DrawerBaseActivity extends AppCompatActivity implements Dr
                 startActivity(new Intent(this,CompassActivity.class));
                 overridePendingTransition(0,0);
                 break;
+            case R.id.mapsActivity:
+                startActivity(new Intent(this,MapsActivity.class));
+                overridePendingTransition(0,0);
+                break;
         }
         return false;
     }
