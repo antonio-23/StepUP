@@ -17,6 +17,4 @@
     <item
         android:id="@+id/mapsActivity"
         android:title="Mapa" />
-
-
 </menu>
